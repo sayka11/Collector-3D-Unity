@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    private Vector3 direction;
+    private float xDirection=0;
+    private float zDirection=0;
+    //координата по у не задана так как наш куб не должен двигаться вверх или вниз
+    public float Speed=1f;
+
+   private void  Start()
+   {
+    direction=new Vector3(0,0,0);
+
+
+   }
+   private void  FixedUpdate()
+   {
+     transform.position+=direction*Speed;
+   }
+    public void MovementRight(){
+
+    }
+    public void MovementLeft(){
+     direction=new Vector3(-1,0,0);
+    }
+     public void MovementUp(){
+     direction=new Vector3(0,0,1);
+
+    }
+     public void MovementDown(){
+     direction=new Vector3(0,0,-1);
+
+    }
+     public void StopMovement(){
+       xDirection=0;
+       zDirection=0;
+    }
+}
