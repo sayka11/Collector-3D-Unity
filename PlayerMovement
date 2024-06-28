@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
     private float zDirection=0;
     //координата по у не задана так как наш куб не должен двигаться вверх или вниз
     public float Speed=1f;
-
+    public Rigidbody rb;
+    public GameObject ScoreText;
+    private int Score;
    private void  Start()
    {
     direction=new Vector3(0,0,0);
@@ -18,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
    }
    private void  FixedUpdate()
    {
-     transform.position+=direction*Speed;
+    rb.velocity=direction*Speed;
    }
     public void MovementRight(){
-
+     direction=new Vector3(1,0,0);
     }
     public void MovementLeft(){
      direction=new Vector3(-1,0,0);
@@ -35,7 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
      public void StopMovement(){
-       xDirection=0;
-       zDirection=0;
+       direction = Vector3.zero;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+       if(other.gameObject.CompareTag("Gems") ){
+        Score++;
+         ScoreText.GetComponent<Text>().text= "Score:" + Score.ToString();
+         Destroy(other.gameObject);
+       }
+    }
+   
 }
