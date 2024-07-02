@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GemSpawner : MonoBehaviour
+{
+    public float SpawnRate=2f;
+    public GameObject[] Gem;
+    public GameObject[] Wall;
+    public int GemCOUNT=0;
+
+    public void Start()
+    {
+        for(int i=0;i<GemCOUNT;i++){
+        RandomPosition();
+
+        }
+      GemCreator();
+    }
+private void GemCreator(){
+ InvokeRepeating("RandomPosition",3f,SpawnRate);
+}
+
+
+    private void RandomPosition()
+    {
+/*
+
+Wall[0]-Нижняя стена
+Wall[1]-Верхняя стена
+Wall[2]-Правая стена
+Wall[3]-Левая стена
+*/
+Vector3 RandomPos;
+RandomPos.x=Random.Range(Wall[2].transform.position.x -3.5f, 
+Wall[3].transform.position.x)+3.5f;
+RandomPos.z=Random.Range(Wall[0].transform.position.z +3.5f, 
+Wall[1].transform.position.z - 3.5f);
+RandomPos.y=3f;
+
+CreateGem(RandomPos);
+
+    }
+
+    private void CreateGem(Vector3 GemCoord){
+        Instantiate(Gem[Random.Range(0,Gem.Length)],GemCoord,Quaternion.identity);
+ 
+    }
+}
+ 
