@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FollowPlayer : MonoBehaviour
+{
+    public GameObject Player;
+    private Vector3 PlayerPosition;
+   private void Start()
+    {
+        PlayerPosition.y=transform.position.y;
+    }
+    void Update()
+    {
+        PlayerPosition.x=transform.position.x;
+        PlayerPosition.z=transform.position.z;
+
+        transform.position=PlayerPosition;
+    }
+}
